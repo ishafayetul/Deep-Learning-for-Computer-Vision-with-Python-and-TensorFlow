@@ -1,7 +1,7 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
-
+#-------------------3D Tensor-------------------------------
 '''
 creating a three dimensional tensor
 shape=(3,2,3) means height 3, row 2, column 3 (H,R,C)
@@ -22,7 +22,8 @@ threeDtensor=tf.constant([
 ])
 
 print(threeDtensor)
-#------------------------------------------------------
+
+#-----------------------4D Tensor-------------------------------
 '''
 Creating a 4D tensor
 '''
@@ -52,7 +53,7 @@ fourDtensor=tf.constant([
 
 print(fourDtensor.ndim)
 
-#------------------------------------------------------------
+#---------------------------Casting---------------------------------
 '''
 casting
 '''
@@ -63,7 +64,7 @@ arr=np.array([1,2,3])
 converted_tensor=tf.convert_to_tensor(arr)
 print("converted np to tf",converted_tensor)
 
-#------------------------------------------------------------
+#--------------------------Identity Matrix----------------------------------
 '''
 creating identity matrix
 default dtype=float32
@@ -75,7 +76,7 @@ eye_tensor=tf.eye(
 )
 print(eye_tensor)
 
-#--------------------------------------------------------------
+#--------------------------filled,ones,zeros,size------------------------------------
 '''
 tf.fill
 tf.ones
@@ -99,7 +100,7 @@ tensor=tf.constant([
 size=tf.size(tensor) #returns number of elements
 print(size)
 
-#------------------------------------------------------------------
+#------------------------------Random------------------------------------
 '''
 tf.random.normal
 tf.random.unifrom
