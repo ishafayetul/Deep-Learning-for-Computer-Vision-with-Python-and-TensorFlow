@@ -5,9 +5,9 @@ class OneNeuron:
         self.row,self.col=input_size
         self.output_size=output_size
 
-        self.w1=np.random.rand(1)
-        self.w2=np.random.rand(1)
-        self.b=np.random.rand(1)
+        self.w1=1 #np.random.rand(1)
+        self.w2=1 #np.random.rand(1)
+        self.b=0 #np.random.rand(1)
     
     def sigmoid(self,z):
         return 1/(1+np.exp(-z)) 
@@ -25,10 +25,10 @@ class OneNeuron:
         return np.mean(-y_true*np.log(y_pred)-(1-y_true)*np.log(1-y_pred))
     
     def derivative(self,x,y_true,y_pred):
-
-        dw1=np.mean((y_pred-y_true)*x[:,0])
-        dw2=np.mean((y_pred-y_true)*x[:,1])
-        db=np.mean(y_pred-y_true)/self.row
+        error = y_pred - y_true
+        dw1=np.mean(error*x[:,0])
+        dw2=np.mean(error*x[:,1])
+        db=np.mean(error)
         return dw1,dw2,db
     
     def update_weights(self,learning_rate):
@@ -56,7 +56,11 @@ class OneNeuron:
     def fit(self,x,y_true,epochs,learning_rate):
         for i in range(epochs):
             self.loss,self.accuracy=self.train(x,y_true,learning_rate)
-        print(f"Epoch {i+1}/{epochs}, Loss: {self.loss}, Accuracy: {self.accuracy}")
+            if i%100==0:
+                print(f"Epoch {i}, Loss: {self.loss}, Accuracy: {self.accuracy}")
+            if self.loss <= 0.5298:
+                break
+        print(f"Training Finished at Epoch {i+1}/{epochs}, Final Loss: {self.loss}, Final Accuracy: {self.accuracy}")
     
     def getParameters(self):
         return self.w1,self.w2,self.b 
